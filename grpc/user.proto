@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+service AuthService {
+  rpc AuthenticateUser(UserCredentials) returns (TokenResponse);
+  rpc ValidateToken(TokenRequest) returns (TokenInfo);
+  rpc RevokeToken(TokenRequest) returns (TokenRevokeResponse);
+}
+
+message UserCredentials {
+  string username = 1;
+  string password = 2;
+}
+
+message TokenResponse {
+  string token = 1;
+}
+
+message TokenRequest {
+  string token = 1;
+}
+
+message TokenInfo {
+  string sub = 1;
+  string role = 2;
+}
+
+message TokenRevokeResponse {
+  bool success = 1;
+}
+
